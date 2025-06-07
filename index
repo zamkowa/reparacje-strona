@@ -3,3 +3,32 @@ git add index.html
 git commit -m "Dodano stronę z licznikiem"
 git remote add origin https://github.com/zamkowa/reparacje-strona.git
 git push -u origin main
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Licznik Reparacji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reparacje od Niemiec</h1>
+    <p>Sprawdź aktualną kwotę reparacji!</p>
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-656bbd0f-fe91-4879-b37e-689fa6adf0e0" data-elfsight-app-lazy></div>
+</body>
+</html>
