@@ -1,8 +1,4 @@
-git init
-git add index.html
-git commit -m "Dodano stronę z licznikiem"
-git remote add origin https://github.com/zamkowa/reparacje-strona.git
-git push -u origin main
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
