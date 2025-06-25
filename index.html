@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Licznik Reparacji</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site-2.webmanifest">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block;
+        }
+        .top-image {
+            margin-bottom: 0px !important;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px !important;
+            box-sizing: border-box;
+        }
+        .label {
+            font-size: 18px;
+            color: #000000;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        #reparacje-amount {
+            font-size: 6vw;
+            font-weight: bold;
+            color: #FF0000;
+            margin: 5px 0;
+            line-height: 1.2;
+            word-break: break-all;
+        }
+        #data-obecna {
+            font-size: 16px;
+            color: #000000;
+            margin: 5px 0;
+        }
+        .bottom-image {
+            margin-top: 0px !important;
+        }
+        /* Media query dla iPhone’ów (ekrany < 400px) */
+        @media (max-device-width: 400px) {
+            .top-image {
+                margin-bottom: 0px !important;
+            }
+            .content {
+                padding: 0px !important;
+            }
+            .bottom-image {
+                margin-top: 0px !important;
+            }
+        }
+        /* Media query dla iPadów i większych ekranów (> 768px) */
+        @media (min-device-width: 768px) {
+            .top-image {
+                margin-bottom: 30px !important;
+            }
+            .content {
+                padding: 30px 15px !important;
+            }
+            .bottom-image {
+                margin-top: 30px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="obraz_gora.jpg" alt="Obraz górny" class="top-image">
+    <div class="content">
+        <p class="label">Aktualna kwota reparacji:</p>
+        <div id="reparacje-amount">Obliczanie...</div>
+        <p id="data-obecna"></p>
+    </div>
+    <img src="obraz_dol.jpg" alt="Obraz dolny" class="bottom-image">
+    <script>
+        const KWOTA_BAZOWA = 6200000000000;
+        const STOPA_PROCENTOWA = 0.05;
+        const DATA_POCZATKOWA = new Date("2022-09-01");
+
+        function obliczOdsetki() {
+            const dataObecna = new Date();
+            const liczbaDni = Math.floor((dataObecna - DATA_POCZATKOWA) / (1000 * 60 * 60 * 24));
+            const odsetki = KWOTA_BAZOWA * STOPA_PROCENTOWA * (liczbaDni / 365.0);
+            const calkowitaKwota = KWOTA_BAZOWA + odsetki;
+            return Math.floor(calkowitaKwota);
+        }
+
+        function formatujKwote(kwota) {
+            return kwota.toLocaleString('pl-PL', { maximumFractionDigits: 0 }) + " PLN";
+        }
+
+        function aktualizujKwote() {
+            const kwota = obliczOdsetki();
+            document.getElementById("reparacje-amount").textContent = formatujKwote(kwota);
+            document.getElementById("data-obecna").textContent = "Stan na: " + new Date().toLocaleDateString('pl-PL');
+        }
+
+        setInterval(aktualizujKwote, 1000);
+        aktualizujKwote();
+    </script>
+</body>
+</html>
